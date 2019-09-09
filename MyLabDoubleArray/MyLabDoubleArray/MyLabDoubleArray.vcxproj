@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{CC18A554-E96F-44C5-A5E2-A47E01EB964F}</ProjectGuid>
-    <RootNamespace>Assign1</RootNamespace>
+    <ProjectGuid>{54F03D2E-EC01-4A0A-A6E4-3A5CFAED2E90}</ProjectGuid>
+    <RootNamespace>MyLabDoubleArray</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -115,12 +115,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Array.cpp" />
-    <ClCompile Include="Array.TestDriver.cpp" />
-    <ClCompile Include="MyArray.cpp" />
+    <ClCompile Include="MyLabDoubleArray.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\Downloads\HerArray.h" />
     <ClInclude Include="Array.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -30,4 +30,4 @@ int& Array::operator[](int index)
 	if (index >= 100) return
 		dummy;
 	return values[index];
-}"
+}
