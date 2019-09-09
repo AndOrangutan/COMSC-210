@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Array.cpp" />
     <ClCompile Include="Array.TestDriver.cpp" />
     <ClCompile Include="MyArray.cpp" />
   </ItemGroup>

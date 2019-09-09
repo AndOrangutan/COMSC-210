@@ -1,15 +1,24 @@
-#include "Array.h"
+//Programmer: Von Mueller
+//Programmer's ID: 1735441
+
 #include <iostream>
-#include <cassert>
 #include <string>
+
+using namespace std;
+
+#include <cassert>
+#include "Array.h"
+
 
 void AMD(std::string, int, int); //417373657274204d65204461646479	;)
 void AMD(int, int);
 
-using namespace std;
-
 int main()
 {
+	std::cout << "Programmer: Von Mueller" << std::endl
+		<< "Programmer's ID: 1735441" << std::endl
+		<< "File: " << __FILE__ << std::endl;
+
 	 Array a;
 	 
 	 std::cout << "\nTesting Array::Array\n" << std::endl;
