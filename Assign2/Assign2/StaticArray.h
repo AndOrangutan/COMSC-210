@@ -1,8 +1,11 @@
 //Programmer: Von Mueller
 //Programmer's ID: 1735441
 
+#ifndef STATICARRAY_H
+#define STATICARRAY_H
+
 template<typename T, int CAP>
-class Array
+class StaticArray
 {
 private:
 
@@ -10,7 +13,7 @@ private:
 	T dummy = T();
 
 public:
-	Array();
+	StaticArray();
 	int capacity() const;
 	T operator[](int) const; //get
 	T& operator[](int); //set
@@ -18,20 +21,20 @@ public:
 };
 
 template<typename T, int CAP>
-Array<T, CAP>::Array()
+StaticArray<T, CAP>::StaticArray()
 {
 	for (int i = 0; i < CAP; i++)
 		values[i] = T();
 }
 
 template<typename T, int CAP>
-int Array<T, CAP>::capacity() const
+int StaticArray<T, CAP>::capacity() const
 {
 	return CAP;
 }
 
 template<typename T, int CAP>
-T Array<T, CAP>::operator[](int index) const
+T StaticArray<T, CAP>::operator[](int index) const
 {
 	if (index < 0)
 		return dummy;
@@ -41,7 +44,7 @@ T Array<T, CAP>::operator[](int index) const
 }
 
 template<typename T, int CAP>
-T& Array<T, CAP>::operator[](int index)
+T& StaticArray<T, CAP>::operator[](int index)
 {
 	if (index < 0) return
 		dummy;
@@ -49,3 +52,5 @@ T& Array<T, CAP>::operator[](int index)
 		dummy;
 	return values[index];
 }
+
+#endif
