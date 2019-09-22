@@ -1,10 +1,8 @@
 //Programmer: Von Mueller
 //Programmer's ID: 1735441
-
+/**/
 #ifndef DYNAMICARRAY_LABEXERCISE4_2_H
 #define DYNAMICARRAY_LABEXERCISE4_2_H
-
-#include <algorithm>
 
 template<typename T>
 class DynamicArray
@@ -24,7 +22,7 @@ public:
 	T operator[] (int) const; //getter
 	T& operator[] (int); //setter
 };
-#endif
+
 
 template<typename T>
 DynamicArray<T>::DynamicArray(int input)//Constructor //default = 2
@@ -74,7 +72,7 @@ DynamicArray<T>& DynamicArray<T>::operator=(const DynamicArray<T>& original) //A
 template<typename T>
 int DynamicArray<T>::capacity() const //getter
 {
-	return this->cap;
+	return cap;
 }
 
 template<typename T>
@@ -84,7 +82,7 @@ void DynamicArray<T>::capacity(int input) //setter
 	T* temp = new T[input];
 
 	// get the lesser of the new and old capacities
-	int limit = min(input, this->cap); //requires C++ "algorithm" library
+	int limit = (cap < this->cap ? cap : this->cap); 
 	
 	//copy the contents
 	for (int i = 0; i < limit; i++)
@@ -105,17 +103,20 @@ void DynamicArray<T>::capacity(int input) //setter
 }
 
 template<typename T>
-T DynamicArray<T>::operator[] (int input) const //getter
+T DynamicArray<T>::operator[] (int index) const //getter
 {
 	if (index < 0 || index >= cap)
 		return T();
-	return value[index];
+	return values[index];
 }
 
 template <typename T>
 T& DynamicArray<T>::operator[] (int index) //setter
 {
-	if (index < 0 || index >= cap)) return
-		dummy;
+	if (index < 0)
+		return dummy;
+	if (index >= cap)
+		capacity(2 * index);
 	return values[index];
 }
+#endif
