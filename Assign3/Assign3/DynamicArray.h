@@ -114,7 +114,7 @@ template <typename T>
 T& DynamicArray<T>::operator[] (int index) //setter
 {
 	if (index < 0)
-		return dummy;
+		return T();
 	if (index >= cap)
 		capacity(2 * index);
 	return values[index];
