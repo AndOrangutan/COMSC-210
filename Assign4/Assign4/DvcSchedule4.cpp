@@ -99,7 +99,7 @@ int main()
 			duplicates++;
 
 		if ((linesParsed % 1000) == 0)
-			std::cout << "*";
+			cout << '.'; cout.flush();
 		linesParsed++;
 
 	
