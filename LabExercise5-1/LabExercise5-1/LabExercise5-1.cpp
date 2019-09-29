@@ -48,9 +48,7 @@ int main()
 
 		
 		// if I get this far, then it's a valid record
-		cout << term << '|' << section << '|'
-			<< course << '|' << instructor << '|'
-			<< whenWhere << '|' << subjectCode << endl;
+		cout << term << '.' << section << '\t' << course << endl;
 
 		
 		count++;
