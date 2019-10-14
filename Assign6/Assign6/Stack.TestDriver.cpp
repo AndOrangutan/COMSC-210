@@ -9,6 +9,10 @@
 
 int main()
 {
+	std::cout << "Programmer: Von Mueller" << std::endl
+		<< "Programmer's ID: 1735441" << std::endl
+		<< "File: " << __FILE__ << std::endl;
+
 	/*
 	//Stack TYPE test
 	const TYPE TYPE1 = ;
