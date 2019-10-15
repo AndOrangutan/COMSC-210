@@ -15,12 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Stack.h">
+    <ClInclude Include="Queue.LabExercise6-2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyRPNCalculator.cpp">
+    <ClCompile Include="Queue.LabExercise6-2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

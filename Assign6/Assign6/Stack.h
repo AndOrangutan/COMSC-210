@@ -17,8 +17,8 @@ class Stack
 	};
 
 	Node* firstNode; // the head pointer
-	int siz;
-	V dummy = 0; //!!! try to make due without this, and comment it out in the end
+	int siz = 0;
+	V dummy = V(); //!!! try to make due without this, and comment it out in the end
 
 public:
 	Stack(); // main construct
@@ -32,8 +32,6 @@ public:
 	int size() const; // return size
 	bool empty() const; // return true if empty
 };
-
-#endif
 
 
 template <typename V>
@@ -96,7 +94,7 @@ Stack<V>& Stack<V>::operator=(const Stack<V>& input)
 			else firstNode = temp;
 			lastnode = temp;
 		}
-		siz = input.size;
+		siz = input.size();
 	}
 	return *this;
 }
@@ -108,7 +106,7 @@ void Stack<V>::push(const V& input)
 	Node* temp = new Node;
 	temp->value = input;
 	temp->next = firstNode;
-	firstNode = temp;
+   firstNode = temp;
 	siz++;
 	
 }
@@ -117,7 +115,7 @@ template <typename V>
 const V& Stack<V>::peek() const
 {
 	if (firstNode == nullptr) return dummy;
-		else firstNode->value;
+	else return firstNode->value;
 }
 
 template <typename V>
@@ -154,6 +152,10 @@ int Stack<V>::size() const
 template <typename V>
 bool Stack<V>::empty() const
 {
-	firstNode == nullptr;
+	if (firstNode == nullptr)
+		return true;
+	else
+		return false;
 }
 
+#endif
