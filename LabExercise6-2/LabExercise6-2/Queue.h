@@ -1,5 +1,5 @@
-	//Programmer: Von Mueller
-	//Programmer's ID: 1735441
+//Programmer: Von Mueller
+//Programmer's ID: 1735441
 
 #ifndef QUEUE_LABEXERCISE6_2_H
 #define QUEUE_LABEXERCISE6_2_H

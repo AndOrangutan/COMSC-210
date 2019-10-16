@@ -1,5 +1,5 @@
-	//Programmer: Von Mueller
-	//Programmer's ID: 1735441
+//Programmer: Von Mueller
+//Programmer's ID: 1735441
 
 #ifndef QUEUE_LABEXERCISE6_2_H
 #define QUEUE_LABEXERCISE6_2_H
@@ -46,7 +46,7 @@ Queue<V>::Queue(const Queue& input)
 	first = nullptr;
 	last = nullptr;
 	siz = input.size();
-	for (Node* p = input.firstNode; p; p = p->next)
+	for (Node* p = input.first; p; p = p->next)
 	{
 		Node* temp = new Node;
 		temp->value = p->value;
@@ -63,17 +63,17 @@ Queue<V>& Queue<V>::operator=(const Queue<V>& input)
 	if (this != &input)
 	{
 		// deallocate existing list
-		while (firstNode)
+		while (first)
 		{
-			Node* p = firstNode;
-			firstNode = firstNode->next;
+			Node* p = first;
+			first = first->next;
 			delete p;
 		}
 
 		//build new queue
 		last = nullptr;
 		siz = input.size();
-		for (Node* p = input.firstNode; p; p = p->next)
+		for (Node* p = input.first; p; p = p->next)
 		{
 			Node* temp = new Node;
 			temp->value = p->value;
@@ -93,7 +93,7 @@ Queue<V>::~Queue()
 	while (first)
 	{
 		Node* p = first;
-		firstNode = first->next;
+		first = first->next;
 		delete p;
 	}
 }
@@ -105,7 +105,7 @@ void Queue<V>::push(const V& input)
 	if (last) last->next = temp;
 	else first = temp;
 	last = temp;
-	siz++
+	siz++;
 }
 
 template <typename V>
@@ -127,28 +127,28 @@ const V& Queue<V>::back() const
 template <typename V>
 void Queue<V>::pop()
 {
-	if (firstNode)
+	if (first)
 	{
-		Node* p = firstNode;
-		firstNode = firstNode->next;
+		Node* p = first;
+		first = first->next;
 		delete p;
 		--siz;
 	}
-	if (size == 0)
+	if (siz == 0)
 		last = nullptr;
 }
 
 template <typename V>
 void Queue<V>::clear()
 {
-	while (firstNode)
+	while (first)
 	{
-		Node* p = firstNode;
-		firstNode = firstNode->next;
+		Node* p = first;
+		first = first->next;
 		delete p;
 		--siz;
 	}
-	if (size == 0)
+	if (siz == 0)
 		last = nullptr;
 }
 
