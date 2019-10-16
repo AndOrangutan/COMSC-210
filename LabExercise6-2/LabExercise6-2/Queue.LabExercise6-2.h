@@ -153,5 +153,4 @@ void Queue<V>::clear()
 }
 
 
-
 #endif

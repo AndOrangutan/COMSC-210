@@ -95,4 +95,5 @@ void prompt(const Stack<double> stack)
 		std::cout << holder.peek() << " ";
 		holder.pop();
 	}
+	std::cout << std::endl;
 }
