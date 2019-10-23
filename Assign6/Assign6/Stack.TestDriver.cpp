@@ -23,6 +23,7 @@ int main()
 	const TYPE TYPE2 = 2.2;
 	const TYPE TYPE3 = 3.333;
 	Stack<TYPE> sTYPE;
+	
 
 	std::cout << "Stack test: (TYPE)" << std::endl
 		<< "-----------------" << std::endl;

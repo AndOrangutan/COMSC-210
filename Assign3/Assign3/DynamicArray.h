@@ -120,3 +120,41 @@ T& DynamicArray<T>::operator[] (int index) //setter
 	return values[index];
 }
 #endif
+
+/*
+template <typename T>
+void swap(int inp1, int inp2)
+{
+	if (inp1 < 0 || inp2 < 0) // greater than 0 cheack
+		return T();
+
+	if (inp1 >= cap || inp2 >= cap) // increases cap if needed
+		if (inp1 < inp2)
+			capacity(2 * inp2);
+		else
+			capacity(2 * inp1);
+
+	T temp = values[inp1]; // swap
+	values[inp1] = values[inp2];
+	values[inp2] = temp;
+}
+*/
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+#include "DynamicArray.h"
+int main()
+{
+
+	string s = "It-is-fun-to-learn-!!";
+	DynamicArray<string> dyString;
+
+	for (int i = 0; s[i] != "\n"; i++)
+	{
+		string temp;
+		temp.pop
+	}
+}

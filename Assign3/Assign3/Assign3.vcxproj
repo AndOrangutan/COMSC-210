@@ -119,7 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DynamicArray.TestDriver.cpp" />
-    <ClCompile Include="MyDynamicArray.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
