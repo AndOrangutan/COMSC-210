@@ -26,7 +26,7 @@ struct subject
 
 bool isDupe(const DynamicArray<string>&, const int, const std::string); //a function to check for duplicates.
 bool subjectExists(const DynamicArray<subject>&, const int, const std::string);
-void subjectSort(DynamicArray<subject>&, const int);
+
 
 int main()
 {
@@ -55,7 +55,7 @@ int main()
 	if (!fin.good())
 		cout << "I/O error. File can't find!\n";
 
-	int n = 800;
+	int n = 1200;
 
 	clock_t startTime = clock(); // start the virtual stop watch...
 	// read the input file
@@ -89,12 +89,6 @@ int main()
 		}
 		else //true
 			duplicates++;
-
-		if ((linesParsed % 1000) == 0)
-			cout << '.'; cout.flush();
-		linesParsed++;
-
-
 	}
 	clock_t endTime = clock(); // ...stop the virtual stop watch
 
@@ -102,7 +96,7 @@ int main()
 	double elapsedSecondsFirst = elapsedSeconds;
 	fin.close();
 
-	std::cout << elapsedSeconds << "(expected " << elapsedSecondsFirst << ") for n=" << n << std::endl;
+	std::cout << elapsedSeconds << "(expected O(n) for n=" << n << std::endl;
 	elapsedSecondsFirst = elapsedSecondsFirst * 2;
 	///////////////////////////////////////////////////////////////////////////////
 	
@@ -146,12 +140,6 @@ int main()
 		}
 		else //true
 			duplicates++;
-
-		if ((linesParsed % 1000) == 0)
-			cout << '.'; cout.flush();
-		linesParsed++;
-
-
 	}
 	endTime = clock(); // ...stop the virtual stop watch
 
@@ -162,6 +150,111 @@ int main()
 	std::cout << elapsedSeconds << "(expected " << elapsedSecondsFirst << ") for n=" << n << std::endl;
 	elapsedSecondsFirst = elapsedSecondsFirst * 2;
 	///////////////////////////////////////////////////////////////////////////////
+
+	// open the input file///////////////////////////////////////////////////////////
+
+	fin.open("dvc-schedule.txt");
+	if (!fin.good())
+		cout << "I/O error. File can't find!\n";
+
+	n = n * 2;
+
+	startTime = clock(); // start the virtual stop watch...
+	// read the input file
+	for (int i = 0; i < n; i++)
+	{
+		// read the line
+		string line;
+		getline(fin, line);
+		strcpy(buf, line.c_str());
+
+
+
+		if (buf[0] == 0) continue; // skip blank lines
+
+		//.term	section	course	instructor	whenWhere
+		//Spring 2016	1236	MATH - 142	Abaalhareth	MTWTH 3:00 - 3 : 50pm MA - 251
+		//parse the line
+		const string term(token = strtok(buf, tab));
+		const string section((token = strtok(0, tab)) ? token : "");
+		const string course((token = strtok(0, tab)) ? token : "");
+		const string instructor((token = strtok(0, tab)) ? token : "");
+		const string whenWhere((token = strtok(0, tab)) ? token : "");
+		if (course.find('-') == string::npos) continue; // invalid line: no dash in course name
+		const string subject(course.begin(), course.begin() + course.find('-'));
+
+		const std::string classCode = term + section;
+
+		if (isDupe(nonDuplicateClass, classIndex, classCode) == false)
+		{
+			nonDuplicateClass[classIndex++] = classCode;
+		}
+		else //true
+			duplicates++;
+	}
+	endTime = clock(); // ...stop the virtual stop watch
+
+	elapsedSeconds = (double)(endTime - startTime) / CLOCKS_PER_SEC;
+
+	fin.close();
+
+	std::cout << elapsedSeconds << "(expected " << elapsedSecondsFirst << ") for n=" << n << std::endl;
+	elapsedSecondsFirst = elapsedSecondsFirst * 2;
+	///////////////////////////////////////////////////////////////////////////////
+
+	// open the input file///////////////////////////////////////////////////////////
+
+	fin.open("dvc-schedule.txt");
+	if (!fin.good())
+		cout << "I/O error. File can't find!\n";
+
+	n = n * 2;
+
+	startTime = clock(); // start the virtual stop watch...
+	// read the input file
+	for (int i = 0; i < n; i++)
+	{
+		// read the line
+		string line;
+		getline(fin, line);
+		strcpy(buf, line.c_str());
+
+
+
+		if (buf[0] == 0) continue; // skip blank lines
+
+		//.term	section	course	instructor	whenWhere
+		//Spring 2016	1236	MATH - 142	Abaalhareth	MTWTH 3:00 - 3 : 50pm MA - 251
+		//parse the line
+		const string term(token = strtok(buf, tab));
+		const string section((token = strtok(0, tab)) ? token : "");
+		const string course((token = strtok(0, tab)) ? token : "");
+		const string instructor((token = strtok(0, tab)) ? token : "");
+		const string whenWhere((token = strtok(0, tab)) ? token : "");
+		if (course.find('-') == string::npos) continue; // invalid line: no dash in course name
+		const string subject(course.begin(), course.begin() + course.find('-'));
+
+		const std::string classCode = term + section;
+
+		if (isDupe(nonDuplicateClass, classIndex, classCode) == false)
+		{
+			nonDuplicateClass[classIndex++] = classCode;
+		}
+		else //true
+			duplicates++;
+	}
+	endTime = clock(); // ...stop the virtual stop watch
+
+	elapsedSeconds = (double)(endTime - startTime) / CLOCKS_PER_SEC;
+
+	fin.close();
+
+	std::cout << elapsedSeconds << "(expected " << elapsedSecondsFirst << ") for n=" << n << std::endl;
+	elapsedSecondsFirst = elapsedSecondsFirst * 2;
+	///////////////////////////////////////////////////////////////////////////////
+
+
+	getchar();
 }
 
 
