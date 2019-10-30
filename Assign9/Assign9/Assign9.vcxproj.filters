@@ -15,17 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Assignment8Part2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="dvc-schedule.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="DynamicArray.h">
+    <ClInclude Include="AssociativeArray.LabExercise8.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
