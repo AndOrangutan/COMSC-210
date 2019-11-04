@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{690B85A0-BBD3-438D-9316-D0C11BF0761D}</ProjectGuid>
-    <RootNamespace>Assign8</RootNamespace>
+    <ProjectGuid>{0FF3204D-5427-4877-B5CF-592B3DA37B8B}</ProjectGuid>
+    <RootNamespace>Assign9</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -115,13 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Assignment8Part2.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="dvc-schedule.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="DynamicArray.h" />
+    <ClInclude Include="AssociativeArray.LabExercise8.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
