@@ -115,15 +115,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Assignment8Part1.cpp" />
-    <ClCompile Include="Assignment8Part2.cpp" />
-    <ClCompile Include="Assignment8Part3.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="dvc-schedule.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DynamicArray.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Assignment8Part1.cpp" />
+    <ClCompile Include="Assignment8Part2.cpp" />
+    <ClCompile Include="Assignment8Part3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
