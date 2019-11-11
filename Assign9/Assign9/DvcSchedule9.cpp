@@ -20,12 +20,94 @@ using namespace std;
 
 
 
-struct subject
+class SectionsForTerm //I am still using a struct/class for this because it makes way more since than any 
 {
-	string subjectCode;
-	int count;
+public:
+	string term;
+	int numberOfSectionsSeen = 0;
+	DynamicArray<string> seenSectionNumber;
 };
 
+
+int main()
+{
+	//Programmer Info
+	std::cout << "Programmer: Von Mueller" << std::endl
+		<< "Programmer's ID: 1735441" << std::endl
+		<< "File: " << __FILE__ << std::endl;
+
+	// Counter Vars
+	int linesParsed = 0; // # of lines parsed
+	int duplicates = 0; // # of duplicates.
+	int TermsSeen = 0; // # of Terms Seen, used to check for duplicates
+
+	AssociativeArray<string, DynamicArray<std::string>> duplicateArr; // For dupe check // <term, arrOfCodes>
+	int duplicateArrSize = 0;
+	AssociativeArray<std::string, int> courseAss; // <course, count>
+	AssociativeArray<std::string, int> sectionAss; // <section, count>
+
+	
+	//AssociativeArray<term, AssociativeArray<
+	
+	// for parsing the inputfile
+	char* token;
+	char buf[1000];
+	const char* const tab = "\t";
+
+	// for parsing the inputfile
+	ifstream fin;
+	fin.open("dvc-schedule.txt");
+	if (!fin.good())
+		cout << "I/O error. File can't find!\n";
+
+	// read the input file
+	while (fin.good()) //Parsing
+	{
+		// read the line
+		string line;
+		getline(fin, line);
+		strcpy(buf, line.c_str());
+
+		if (buf[0] == 0) continue; // skip blank lines
+
+
+		//parse the line
+			//Format
+			//.term	section	course	instructor	whenWhere
+			//Spring 2016	1236	MATH - 142	Abaalhareth	MTWTH 3:00 - 3 : 50pm MA - 251
+		const string term(token = strtok(buf, tab));
+		const string section((token = strtok(0, tab)) ? token : "");
+		const string course((token = strtok(0, tab)) ? token : "");
+		const string instructor((token = strtok(0, tab)) ? token : "");
+		const string whenWhere((token = strtok(0, tab)) ? token : "");
+		if (course.find('-') == string::npos) continue; // invalid line: no dash in course name
+		const string subject(course.begin(), course.begin() + course.find('-'));
+
+		
+		/*
+		if TermExissts
+
+		*/
+	
+		bool isFoundDupe = false;
+		int isComplete = 0;
+		for (int i = 0; i < duplicateArr[term].size(); i++)
+		{
+			if (duplicateArr[term][i] == course) // Dupelicate check
+				isFoundDupe = true;
+			if(isFoundDupe == true) // efficiency stop
+				break;
+			if (i == duplicateArr.size() - 1)//checks if it is last iteration
+				isComplete = i;
+		}
+		
+		if (isComplete == true)
+		{
+			duplicateArr[term][duplicateArr[term].size()+1]
+		}
+	}
+
+/*
 int check_term(const string, const DynamicArray<SectionsForTerm> &, int); //string term for parcing, DyArray,
 bool check_section(const string, const SectionsForTerm&); //
 bool subjectExists(const DynamicArray<subject> &, const int, const std::string);
@@ -162,7 +244,6 @@ int check_term(const string term, const DynamicArray<SectionsForTerm> & alreadyS
 
 	}
 	return -1;
-
 }
 bool check_section(const string section, const SectionsForTerm& alreadySeenObj)
 {
@@ -196,3 +277,4 @@ void subjectSort(DynamicArray<subject>& subArray, const int cap)
 		subArray[i] = temp;
 	}
 }
+*/

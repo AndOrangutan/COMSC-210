@@ -11,6 +11,7 @@ private:
 	T* values; //T datatype CAP capacity
 	int cap;
 	T dummy = T();
+	int siz = 0;
 
 public:
 	DynamicArray(int = 2);//Constructor //default = 2
@@ -21,6 +22,7 @@ public:
 	void capacity(int); //setter
 	const T& operator[] (int) const; //getter
 	T& operator[] (int); //setter
+	int size();
 };
 
 
@@ -28,6 +30,7 @@ template<typename T>
 DynamicArray<T>::DynamicArray(int input)//Constructor //default = 2
 {
 	this->cap = input;
+	siz = input;
 	values = new T[cap];
 
 	for (int i = 0; i < cap; i++)
@@ -43,6 +46,7 @@ DynamicArray<T>::DynamicArray(const DynamicArray<T>& original) //Copy constructo
 	for (int i = 0; i < cap; i++) //copy the contents of the orginal array
 		values[i] = original.values[i]; //...to the copy
 	dummy = original.dummy;
+	siz = original.siz;
 }
 
 template<typename T>
@@ -64,6 +68,7 @@ DynamicArray<T>& DynamicArray<T>::operator=(const DynamicArray<T>& original) //A
 		for (int i = 0; i < cap; i++) //copy the contents of the orginal array
 			values[i] = original.values[i]; //...to the copy
 		dummy = original.dummy;
+		siz = original.siz;
 
 	}
 	return *this;
@@ -117,6 +122,13 @@ T& DynamicArray<T>::operator[] (int index) //setter
 		return dummy;
 	if (index >= cap)
 		capacity(2 * index);
+	siz++;
 	return values[index];
+}
+
+template<typename T>
+int DynamicArray<T>::size()
+{
+	return siz;
 }
 #endif
