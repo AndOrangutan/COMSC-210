@@ -7,7 +7,7 @@ class PriorityQueue
 	void capacity(int);
 
 public:
-	PriorityQueue(int = 0);
+	PriorityQueue(int = 2);
 	PriorityQueue(const PriorityQueue<V>&);
 	PriorityQueue() { delete[] values; }
 	PriorityQueue<V>& operator=(const PriorityQueue<V>&);
@@ -52,7 +52,7 @@ template <typename V>
 PriorityQueue<V>::PriorityQueue(int input)
 {
 	this->cap = input;
-	siz = input;
+	siz = 0;
 	values = new V[cap];
 
 	for (int i = 0; i < cap; i++)
@@ -93,12 +93,82 @@ PriorityQueue<V>& PriorityQueue<V>::operator=(const PriorityQueue<V>& input)
 template <typename V>
 void PriorityQueue<V>::push(const V& input)
 {
+	if (siz == cap)
+		capacity(cap * 2);
+
+	values[siz] = input;
+	int index = siz;
+	siz++; // Just doing this before the break
+	while (index != 0)
+	{
+		int parent = ((index + 1) / 2 - 1); // create a parent variable that is the parent of "int index;"
+		if (values[parent] < values[index]) // if parent is lesser than child, swap values
+		{
+			V temp = values[index];
+			values[index] = values[parent];
+			values[parent] = temp;
+
+			index = parent;
+		}
+		else // you should be sorted :/
+			break
+	}
 
 }
 
 template <typename V>
 void PriorityQueue<V>::pop()
 {
+	values[0] = 0; // "delete" head
+	
+	if (siz == 0) 
+		return;
+
+	// Fill the hole implementation
+	values[0] = values[siz-1];
+	
+	int index = 0;
+
+	// loop 1: fill the top position
+	while (index < siz)
+	{
+		int leftIndex = 2 * index + 1; // calc left childs index
+		int rightIndex = 2 * index + 2; // calc right childs index
+
+		if (leftIndex == siz) // if no left child
+			break;
+		if (rightIndex == siz) // if no right child
+		{
+			values[index] = values[leftIndex];
+			index = leftIndex;
+		}
+		else if{values[rightIndex] < values[leftIndex]}
+		{
+			values[index] = values[leftIndex];
+			index = leftIndex;
+		}
+		else
+		{
+			values[index] = values[rightIndex];
+			index = rightIndex;
+		}
+	}
+	siz--;
+	values[index] = values[siz];
+
+	// loop 2: The grand promotion
+	while (index > 0) // breaks if index == 0
+	{
+		int parent = ((index + 1) / 2 - 1); // create a parent variable that is the parent of "int index;"
+		if (values[index] < values[parent])
+			break;
+
+		V temp = values[index];
+		values[index] = values[parent];
+		values[parent] = temp;
+
+		index = parent;
+	}
 
 }
 
