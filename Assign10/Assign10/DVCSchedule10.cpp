@@ -135,6 +135,7 @@ int d_hashCode(const std::string& input)
 
 	for (int j = 0; j < 4; j++)
 		result += (int)(input.at(i + j)) * pow(10, j);
+	return result;
 }
 
 int hashCode(const std::string& input)
