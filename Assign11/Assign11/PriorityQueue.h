@@ -55,7 +55,7 @@ template <typename V>
 PriorityQueue<V>::PriorityQueue()
 {
 	cap = 2;
-	V values[2];
+	values = new V[2];
 
 	for (int i = 0; i < cap; i++)
 		values[i] = V();
@@ -95,12 +95,14 @@ PriorityQueue<V>& PriorityQueue<V>::operator=(const PriorityQueue<V>& input)
 template <typename V>
 void PriorityQueue<V>::push(const V& input)
 {
-	if (siz == cap)
+	siz++; // Just doing this before the break
+	if (siz >= cap)
 		capacity(cap * 2);
 
-	values[siz] = input;
+	std::cout << siz;
+	values[siz-1] = input;
 	int index = siz;
-	siz++; // Just doing this before the break
+	
 	while (index != 0)
 	{
 		int parent = ((index + 1) / 2 - 1); // create a parent variable that is the parent of "int index;"
@@ -121,7 +123,7 @@ void PriorityQueue<V>::push(const V& input)
 template <typename V>
 void PriorityQueue<V>::pop()
 {
-	values[0] = 0; // "delete" head
+	values[0] = V(); // "delete" head
 	
 	if (siz == 0) 
 		return;

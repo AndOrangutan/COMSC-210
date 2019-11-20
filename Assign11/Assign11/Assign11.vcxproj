@@ -121,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BetterSimulation.cpp" />
-    <ClCompile Include="PriorityQueue.pop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="simulation.txt" />

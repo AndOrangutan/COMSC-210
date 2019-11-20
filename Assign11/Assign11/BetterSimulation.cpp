@@ -17,12 +17,7 @@ using namespace std;
 #include <cstdlib>
 #include <ctime>
 
-// Functions
-Queue<float> readFile();
-bool operator<(const serviceEvent&, const serviceEvent&);
-int getRandomNumberOfArrivals(double);
-
-// Class
+// Classes
 class Customer
 {
 public:
@@ -44,6 +39,11 @@ public:
 	int endTime;
 };
 
+// Functions
+bool operator<(const serviceEvent&, const serviceEvent&);
+int getRandomNumberOfArrivals(double);
+
+
 
 int main()
 {
@@ -64,10 +64,26 @@ int main()
 	DynamicArray<serverInfo> servers;
 	PriorityQueue<serviceEvent> eventList;
 
+	// open the input file
+	std::ifstream myfile("simulation.txt");
+
+	if (!myfile.good())
+		std::cout << "I/O error. File can't find!\n";
+
+	Queue<float> bbq;
+
+	while (myfile.good())
+	{
+		std::string line;
+		std::getline(myfile, line);
+
+
+		bbq.push(atof(line.c_str()));
+	}
+	myfile.close();
+	
 
 	//set values
-	Queue<float> bbq = readFile();
-
 	numOfServers = bbq.front();
 	bbq.pop();
 	arrivalRate = bbq.front();
@@ -93,12 +109,12 @@ int main()
 	for (int time = 0; ; time++)
 	{
 		// Finish Service//////////////////////////////////////////////////////////////////////////////////////////
-		
+
 		for (int i = 0; i < numOfServers; i++)
 			if (servers[i].idle == false) // if busy
 				if (eventList.top().serverNum == i && eventList.top().endTime == time) // stuff
 					servers[i].idle = true;
-		
+
 
 		// Update Queue////////////////////////////////////////////////////////////////////////////////////////////
 		bool isFirst = true;
@@ -109,7 +125,7 @@ int main()
 			if (waitLine.size() < maxQueueLength)
 			{
 				Customer c;
-				if (waitLine.empty == true && isFirst == true)
+				if (waitLine.empty() == true && isFirst == true)
 				{
 					dummy = 'A';
 					isFirst = false;
@@ -154,7 +170,7 @@ int main()
 		// |       0|            A|           |
 		// |       1|            B|           |
 		// |________|_____________|___________|
-		
+
 		const int SCALE1 = 1;
 		const int SCALE2 = 1;
 		const int SCALE3 = 6;
@@ -162,7 +178,7 @@ int main()
 		const int SCALE5 = 10;
 
 		Queue<Customer> newQ = waitLine;
-		PriorityQueue<serviceEvent> newPQ= eventList;
+		PriorityQueue<serviceEvent> newPQ = eventList;
 
 		std::cout << " __________________________________" << std::endl
 			<< "| Server | Time for End-of-Service |" << std::endl
@@ -170,7 +186,7 @@ int main()
 		for (int i = 0; i < numOfServers; i++)
 		{
 			std::cout << std::right << '|' << std::setw(SCALE1) << newPQ.top().serverNum << '|' << std::setw(SCALE2) << newPQ.top().endTime << "|" << std::endl;
-			newPQ.pop;
+			newPQ.pop();
 		}
 		std::cout << std::endl << "Time: " << time << std::endl
 			<< " __________________________________" << std::endl
@@ -212,33 +228,12 @@ int main()
 			<< "Press ENTER to continue..." << std::endl;
 		std::getchar();
 
-	std::cout << "Done!";
+		std::cout << "Done!";
 
-	std::getchar();
-	// read the input file
-	//while (fin.good())
-}
-
-Queue<float> readFile()
-{
-	// open the input file
-	std::ifstream myfile("simulation.txt");
-
-	if (!myfile.good())
-		std::cout << "I/O error. File can't find!\n";
-
-	Queue<float> bbQueue;
-
-	while (myfile.good())
-	{
-		std::string line;
-		std::getline(myfile, line);
-
-
-		bbQueue.push(atof(line.c_str()));
+		std::getchar();
+		// read the input file
+		//while (fin.good())
 	}
-	myfile.close();
-	return bbQueue;
 }
 
 bool operator<(const serviceEvent& a, const serviceEvent& b)

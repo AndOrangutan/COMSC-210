@@ -26,9 +26,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PriorityQueue.pop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BetterSimulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
