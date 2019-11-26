@@ -203,10 +203,7 @@ void Simulation::updateQueue(int time)
 			}
 			arrivals--;
 		}
-	
 	}
-	
-
 }
 
 void Simulation::startService(int time)
