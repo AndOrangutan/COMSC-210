@@ -171,11 +171,11 @@ int main()
 		// |       1|            B|           |
 		// |________|_____________|___________|
 
-		const int SCALE1 = 1;
-		const int SCALE2 = 1;
-		const int SCALE3 = 6;
-		const int SCALE4 = 11;
-		const int SCALE5 = 10;
+		const int SCALE1 = 8;
+		const int SCALE2 = 25;
+		const int SCALE3 = 8;
+		const int SCALE4 = 13;
+		const int SCALE5 = 11;
 
 		Queue<Customer> newQ = waitLine;
 		PriorityQueue<serviceEvent> newPQ = eventList;
@@ -188,6 +188,7 @@ int main()
 			std::cout << std::right << '|' << std::setw(SCALE1) << newPQ.top().serverNum << '|' << std::setw(SCALE2) << newPQ.top().endTime << "|" << std::endl;
 			newPQ.pop();
 		}
+		std::cout << "|________|_________________________|" << std::endl;
 		std::cout << std::endl << "Time: " << time << std::endl
 			<< " __________________________________" << std::endl
 			<< "| Server | Now Serving | Wait Line |" << std::endl
@@ -224,7 +225,7 @@ int main()
 				std::cout << '|' << std::setw(SCALE5 + 1) << '|' << std::endl;
 			}
 		}
-		std::cout << "|______|___________|__________|" << std::endl
+		std::cout << "|________|_____________|___________|" << std::endl
 			<< "Press ENTER to continue..." << std::endl;
 		std::getchar();
 
