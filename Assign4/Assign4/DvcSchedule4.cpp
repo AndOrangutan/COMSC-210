@@ -1,5 +1,5 @@
-﻿//Programmer: Von Mueller
-//Programmer's ID: 1735441
+﻿	//Programmer: Von Mueller
+	//Programmer's ID: 1735441
 
 //use stream strin
 //strtok() uses cstring, is a char array
