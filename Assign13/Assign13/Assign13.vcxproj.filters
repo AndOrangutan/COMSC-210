@@ -18,9 +18,6 @@
     <ClCompile Include="DVCSheduleSearch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DvcScheduleCheck.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="dvc-schedule.txt">

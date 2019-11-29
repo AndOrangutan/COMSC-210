@@ -115,7 +115,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DvcScheduleCheck.cpp" />
     <ClCompile Include="DVCSheduleSearch.cpp" />
   </ItemGroup>
   <ItemGroup>
