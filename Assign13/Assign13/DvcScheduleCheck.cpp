@@ -13,7 +13,7 @@
 using namespace std;
 
 // .h includes
-	
+
 
 // classes
 
@@ -28,7 +28,7 @@ int main()
 
 	//vars
 	int linesParsed = 0; //classIndex + duplicates should equal linesParsed
-	map<std::string, set<int>> allClass;
+	map<std::string, set<std::string>> allKeys;
 
 	// for parsing the inputfile
 	char* token;
@@ -65,19 +65,14 @@ int main()
 		//const std::string classCode = term + section;
 
 		std::string cpyTerm = term;
-		const char* const space = " ";
-		strcpy(buf, cpyTerm.c_str());
+		int spaceIndex = cpyTerm.size();
 
-		std::string season(token = strtok(buf, space));
-		std::string year((token = strtok(0, space)) ? token : "");
-		/*
-		for (unsigned int i = 0; i < cpyTerm.size(); i++) // find space index;
+		for (int i = 0; i < cpyTerm.size(); i++) // find space index;
 			if (cpyTerm.at(i) == ' ')
 				spaceIndex = i;
 
 		std::string season, year;
 		bool flag = false;
-
 		for (int i = 0; i < cpyTerm.size(); i++)
 			if (cpyTerm[i] == ' ')
 				flag = true;
@@ -85,7 +80,6 @@ int main()
 				season.push_back(cpyTerm[i]);
 			else if (flag == true)
 				year.push_back(cpyTerm[i]);
-		*/
 
 		//std::cout << season << " " << year << std::endl;
 		//getchar();
@@ -101,7 +95,6 @@ int main()
 
 		//std::cout << course << " " << year << std::endl;
 
-		allClass[course].insert(atoi(year.c_str())); // push an integer value created from that string into the map allClass
 
 	}
 	fin.close();
@@ -117,11 +110,11 @@ int main()
 		{
 			std::string seasons[] = { "Spring", "Summer", "Fall" };
 			//std::cout << *(allClass[input].begin()) << " " << *allClass[input].rbegin() << std::endl;
-			int ind1 = *allClass[input].begin() - (10*int(*(allClass[input].begin()) * 0.1)); // 20182 -> 2018.2 -> 2018 -> 20180 -> 20182-20180 = season
-			int ind2 = *allClass[input].rbegin() - (10*int(*(allClass[input].rbegin()) * 0.1));
-			
-			std::cout << input << " was first offered in " << seasons[ind1-1] << " " << int(*(allClass[input].begin()) * 0.1) << std::endl
-				<< input << " was laast offered in " << seasons[ind2-1] << " " << int(*(allClass[input].rbegin()) * 0.1) << std::endl << std::endl;
+			int ind1 = *allClass[input].begin() - (10 * int(*(allClass[input].begin()) * 0.1)); // 20182 -> 2018.2 -> 2018 -> 20180 -> 20182-20180 = season
+			int ind2 = *allClass[input].rbegin() - (10 * int(*(allClass[input].rbegin()) * 0.1));
+
+			std::cout << input << " was first offered in " << seasons[ind1 - 1] << " " << int(*(allClass[input].begin()) * 0.1) << std::endl
+				<< input << " was laast offered in " << seasons[ind2 - 1] << " " << int(*(allClass[input].rbegin()) * 0.1) << std::endl << std::endl;
 		}
 	} while (input != "x" && input != "X");
 }
