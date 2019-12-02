@@ -115,10 +115,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DVCSheduleSearch.cpp" />
+    <ClCompile Include="DvcScheduleSearchBST.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="dvc-schedule.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BinarySearchTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
