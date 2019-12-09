@@ -61,60 +61,23 @@ int main()
 		const string whenWhere((token = strtok(0, tab)) ? token : "");
 		if (course.find('-') == string::npos) continue; // invalid line: no dash in course name
 		//const string subject(course.begin(), course.begin() + course.find('-'));
+		const std::string classCode = term + "-" + section;
 
-		//const std::string classCode = term + section;
-
-		std::string cpyTerm = term;
-		int spaceIndex = cpyTerm.size();
-
-		for (int i = 0; i < cpyTerm.size(); i++) // find space index;
-			if (cpyTerm.at(i) == ' ')
-				spaceIndex = i;
-
-		std::string season, year;
-		bool flag = false;
-		for (int i = 0; i < cpyTerm.size(); i++)
-			if (cpyTerm[i] == ' ')
-				flag = true;
-			else if (flag == false)
-				season.push_back(cpyTerm[i]);
-			else if (flag == true)
-				year.push_back(cpyTerm[i]);
-
-		//std::cout << season << " " << year << std::endl;
-		//getchar();
-
-		if (season == "Spring") // make a string of integers
-			year.push_back('1');
-		else if (season == "Summer")
-			year.push_back('2');
-		else if (season == "Fall")
-			year.push_back('3');
-		else
-			std::cout << "Shits fucked" << std::endl;
-
-		//std::cout << course << " " << year << std::endl;
-
+		allKeys[classCode].insert(course);
 
 	}
 	fin.close();
 
-	std::string input = "PlaceHolder";
-	do
+	map<string, set<string>>::iterator it;
+	for (it = allKeys.begin(); it != allKeys.end(); it++)
 	{
-		std::cout << "Enter a course name (like, COMSC-210) to search for the first/last semester course offered [X/x to exit]:" << std::endl << "\t";
-		cin >> input;
-		if (allClass.find(input) == allClass.end())
-			std::cout << "I didn't find " << input << std::endl << std::endl;
-		else
+		if(it -> second.size() > 1)
 		{
-			std::string seasons[] = { "Spring", "Summer", "Fall" };
-			//std::cout << *(allClass[input].begin()) << " " << *allClass[input].rbegin() << std::endl;
-			int ind1 = *allClass[input].begin() - (10 * int(*(allClass[input].begin()) * 0.1)); // 20182 -> 2018.2 -> 2018 -> 20180 -> 20182-20180 = season
-			int ind2 = *allClass[input].rbegin() - (10 * int(*(allClass[input].rbegin()) * 0.1));
-
-			std::cout << input << " was first offered in " << seasons[ind1 - 1] << " " << int(*(allClass[input].begin()) * 0.1) << std::endl
-				<< input << " was laast offered in " << seasons[ind2 - 1] << " " << int(*(allClass[input].rbegin()) * 0.1) << std::endl << std::endl;
+			std::cout << "Multiple courses found for key (term-section) - " << it->first << ":" << std::endl; // display the key
+			set<string>::iterator it2;
+			for (it2 = it->second.begin(); it2 != it->second.end(); it2++)
+				std::cout << *it2 << std::endl;
 		}
-	} while (input != "x" && input != "X");
+	}
+	getchar();
 }
