@@ -97,7 +97,7 @@ int main()
 		else if (season == "Fall")
 			year.push_back('3');
 		else
-			std::cout << "Shits fucked" << std::endl;
+			std::cout << "ERROR: Shits fucked" << std::endl;
 
 		//std::cout << course << " " << year << std::endl;
 

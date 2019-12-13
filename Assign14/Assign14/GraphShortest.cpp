@@ -1,111 +1,169 @@
+// Solution file for COMSC-210
+// Orland Tompkins
+// 1000773
+
 #include <fstream>
 #include <iostream>
 #include <list>
 #include <queue>
-#include <stack>
 #include <string>
 #include <vector>
-#include <utility>
+#include <stack>
 using namespace std;
-
-#include <cstdlib>
 
 struct Node
 {
   string name;
 
+  int prev; //new
+  int cost; // new
   bool isVisited;
-  list<pair<int, double> > neighbors;
-  int prev;
-  double cost;
+  list<int> neighbors;
 };
 
-pair<stack<int>, double> getShortestRoute(int iStart, int iEnd, vector<Node>& database)
+// BFS return a queue contains the indexes of all reachable nodes
+stack<int> BFS_Shortest(int iOriginNode, int iEndNode, vector<Node>& database)
 {
-  pair<stack<int>, double> result;
-  list<pair<int, double> >::iterator it; // to iterate over neighbors
-// TO DO -- write this function
+  stack<int> result; // return this queue of indices
+  queue<int> toDo;   // queue
+
+  // initialization of the database
+  for(int i = 0; i < database.size(); i++)
+  {
+    database[i].prev = -1; //new
+    database[i].cost = 0; //new
+    database[i].isVisited = false;
+  }
+
+  // mark start node
+  database[iOriginNode].isVisited = true;
+  // push to result
+  // result.push(iOriginNode);
+  // push to "to do" list
+  toDo.push(iOriginNode);
+
+  while(!toDo.empty())
+  {
+    int i = toDo.front(); //node under consideration
+    toDo.pop();
+    list<int> neighbors = database[i].neighbors;
+
+    for(list<int>::const_iterator it = neighbors.begin(); it != neighbors.end(); ++it)
+    {
+      if(!database[*it].isVisited)
+      {
+        database[*it].prev = i; //new
+        database[*it].cost = 1 +  database[i].cost; //new
+        database[*it].isVisited = true;
+    //    result.push(*it);
+        toDo.push(*it);
+      }
+      if (*it == iEndNode)
+      { //empty the queue
+        while (!toDo.empty())
+          toDo.pop();
+        break;
+      }
+    }
+  }
+  
+ // result.push(iEndNode);
+  int index = iEndNode;
+  while (index != -1){
+    result.push(index);
+    index = database[index].prev;
+  }
   return result;
 }
 
 int main()
 {
+  // programmer's identification
+  cout << "Programmer: Orland Tompkins\n";
+  cout << "Programmer's ID: 1000773\n";
+  cout << "Solution file (Part 1)\n";
+  cout << "File: " << __FILE__ << endl << endl;
+    
+
   ifstream fin;
   fin.open("cities.txt");
-  if (!fin.good()) throw "I/O error";  
+  if(!fin.good()) throw "I/O error";
 
-  // process the input file
+  // process the input file to build up the database****
   vector<Node> database;
-  while (fin.good()) // EOF loop
+  while(fin.good()) // EOF loop
   {
-    string fromCity, toCity, cost;
+    string fromCity, toCity;
 
     // read one edge
     getline(fin, fromCity);
     getline(fin, toCity);
-    getline(fin, cost);
+    fin.ignore(1000, 10); // skip the line with distance
     fin.ignore(1000, 10); // skip the separator
 
-    // add nodes for new cities included in the edge
+    // add vertices for new cities included in the edge
     int iToNode = -1, iFromNode = -1, i;
-    for (i = 0; i < database.size(); i++) // seek "to" city
-      if (database[i].name == fromCity)
+    for(i = 0; i < database.size(); i++) // seek "to" city
+      if(database[i].name == fromCity)
         break;
-    if (i == database.size()) // not in database yet
+    if(i == database.size()) // not in database yet
     {
       // store the node if it is new
       Node fromNode = {fromCity};
       database.push_back(fromNode);
     }
-    iFromNode = i; 
+    iFromNode = i;
 
-    for (i = 0; i < database.size(); i++) // seek "from" city
-      if (database[i].name == toCity)
+    for(i = 0; i < database.size(); i++) // seek "from" city
+      if(database[i].name == toCity)
         break;
-    if (i == database.size()) // not in vector yet
+    if(i == database.size()) // not in vector yet
     {
       // store the node if it is new
       Node toNode = {toCity};
       database.push_back(toNode);
     }
-    iToNode = i; 
+    iToNode = i;
 
     // store bi-directional edges
-    double edgeCost = atof(cost.c_str());
-    database[iFromNode].neighbors.push_back(pair<int, double>(iToNode, edgeCost));
-    database[iToNode].neighbors.push_back(pair<int, double>(iFromNode, edgeCost));
+    database[iFromNode].neighbors.push_back(iToNode);
+    database[iToNode].neighbors.push_back(iFromNode);
   }
   fin.close();
   cout << "Input file processed\n\n";
-
-  while (true)
+  // End of process the input file to build up the database****
+    
+  while(true)
   {
-    string fromCity, toCity;
-    cout << "\nEnter the source city [blank to exit]: ";
-    getline(cin, fromCity);
-    if (fromCity.length() == 0) break;
+    // get the start city for the search
+    string startCity;
+    cout << "\nEnter the start city [blank to exit]: ";
+    getline(cin, startCity);
+    if(startCity.length() == 0) break;
 
-    // find the from city
-    int iFrom;
-    for (iFrom = 0; iFrom < database.size(); iFrom++)
-      if (database[iFrom].name == fromCity)
+    // find the start city
+    int i;
+    for(i = 0; i < database.size(); i++)
+      if(database[i].name == startCity)
         break;
+        
+// get the end city for the shortest route
+    string endCity;
+    cout << "\nEnter the end city [blank to exit]: ";
+    getline(cin, endCity);
+	 if (endCity.length() == 0) break;
 
-    cout << "Enter the destination city [blank to exit]: ";
-    getline(cin, toCity);
-    if (toCity.length() == 0) break;
-
-    // find the destination city
-    int iTo;
-    for (iTo = 0; iTo < database.size(); iTo++)
-      if (database[iTo].name == toCity)
+    // find the end city
+    int j;
+    for(j = 0; j < database.size(); j++)
+      if(database[j].name == endCity)
         break;
-
-    cout << "Route";
-    pair<stack<int>, double> result = getShortestRoute(iFrom, iTo, database);
-    for (; !result.first.empty(); result.first.pop())
-      cout << '-' << database[result.first.top()].name;
-    cout << "Total edges: " << result.second;  
+        
+    // BFS result by copy-pop
+    cout << "BFS - Shortest Route:" << endl;
+    for(stack<int> s = BFS_Shortest(i, j, database); !s.empty(); s.pop())
+      cout  << '-'<< database[s.top()].name;
     cout << endl;
   }
 }
+

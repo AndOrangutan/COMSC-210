@@ -1,7 +1,12 @@
+
 //Solution file for COMSC-210
 //Module 13 - Graph Searches
 // LabExercise 13 Part 1
 //BFS_Shortest.cpp (use a queue to build up the to-do list)
+
+//Modified into the cheapest by:
+//Programmer: Von Mueller
+//Programmer's ID: 1735441
 
 #include <fstream>
 #include <iostream>
@@ -10,6 +15,7 @@
 #include <string>
 #include <vector>
 #include <stack>
+#include <utility>
 using namespace std;
 
 struct Node
@@ -17,13 +23,26 @@ struct Node
   string name;
 
   int prev; //new
-  int cost; // new
+  double cost; // new
   bool isVisited;
-  list<int> neighbors;
+  list<pair<int, double>> neighbors;
 };
 
+struct Terminus
+{
+	int index;
+	int prev;
+	double cost;
+
+};
+
+bool operator<(const Terminus& a, const Terminus& b)
+{
+	return b.cost < a.cost;	
+}
+
 // BFS return a queue contains the indexes of all reachable nodes
-stack<int> BFS_Shortest(int iOriginNode, int iEndNode, vector<Node>& database)
+pair<stack<int>, double> getCheapestRoute(int iStart, int iEnd, vector<Node>& database)
 {
   stack<int> result; // return this queue of indices
   queue<int> toDo;   // queue
@@ -79,9 +98,9 @@ stack<int> BFS_Shortest(int iOriginNode, int iEndNode, vector<Node>& database)
 
 int main()
 {
-  cout << "Assignment 14\n"
-       << "Solution file (Part 1)\n"
-       << "File: " << __FILE__ << "\n\n";
+	std::cout << "Programmer: Von Mueller" << std::endl
+		<< "Programmer's ID: 1735441" << std::endl
+		<< "File: " << __FILE__ << std::endl << std::endl;
 
   ifstream fin;
   fin.open("cities.txt");
@@ -91,11 +110,12 @@ int main()
   vector<Node> database;
   while(fin.good()) // EOF loop
   {
-    string fromCity, toCity;
+    string fromCity, toCity, cost;
 
     // read one edge
     getline(fin, fromCity);
     getline(fin, toCity);
+	 getline(fin, cost);
     fin.ignore(1000, 10); // skip the line with distance
     fin.ignore(1000, 10); // skip the separator
 
@@ -124,7 +144,11 @@ int main()
     iToNode = i;
 
     // store bi-directional edges
+	 pair<int, double> edge;
+	 edge.first = iToNode;
+	 edge.second = atof(cost.c_str());
     database[iFromNode].neighbors.push_back(iToNode);
+	 edge.first = iFromNode;
     database[iToNode].neighbors.push_back(iFromNode);
   }
   fin.close();
@@ -157,10 +181,7 @@ int main()
       if(database[j].name == endCity)
         break;
         
-    // BFS result by copy-pop
-    cout << "BFS - Shortest Route:" << endl;
-    for(stack<int> s = BFS_Shortest(i, j, database); !s.empty(); s.pop())
-      cout  << '-'<< database[s.top()].name;
-    cout << endl;
+    //
+	 double cost
   }
 }

@@ -355,7 +355,7 @@ void SortableArray<T>::sort(int fillLine)
 			}
 		}
 	}
-	delete[] temp;
+	delete[] temp;	
 }
 
 #endif

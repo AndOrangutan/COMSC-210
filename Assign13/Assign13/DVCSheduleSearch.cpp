@@ -48,10 +48,10 @@ int main()
 		string line;
 		getline(fin, line);
 		strcpy(buf, line.c_str());
-
+			
 		if (buf[0] == 0) continue; // skip blank lines
 
-		//.term	section	course	instructor	whenWhere
+		//.term	section	course	instructor	whenWhere	
 		//Spring 2016	1236	MATH - 142	Abaalhareth	MTWTH 3:00 - 3 : 50pm MA - 251
 		//parse the line
 		const string term(token = strtok(buf, tab));
